@@ -3,6 +3,7 @@ from tkinter import ttk
 import tkinter.font as font
 from PIL import ImageTk,Image
 from AppGUI import MapFrame,UserEntryFrame
+import webbrowser
 
 
 
@@ -26,11 +27,24 @@ class MainWindow:
 
     def showCriedts(self,master):
         window=Toplevel(master)
-        boldfont=font.Font(weight="bold",size=20)
-        Label(window,text='Coded By').pack()
+        boldfont=font.Font(weight="bold",size=14)
+        Label(window,text='Developed By').pack()
         Label(window,text='Mahmoud Nasser',font=boldfont).pack()
+
+        linked = Label(window, text="LinkedIn profile", fg="blue", cursor="hand2")
+        linked.pack()
+        linked.bind("<Button-1>", lambda e: webbrowser.open("https://github.com/CSEMN"))
+
+
+        logoImg = Image.open("assets/logo.png").resize((140,60), Image.ANTIALIAS)
+        self.logophoto = ImageTk.PhotoImage(logoImg)
+        Label(window,image=self.logophoto).pack()
+        
         Label(window,text='Supervised by').pack()
         Label(window,text='Dr\\ Ahmed Ghozia',font=boldfont).pack()
+        universityImg = Image.open("assets/university.png").resize((200,120), Image.ANTIALIAS)
+        self.uniphoto = ImageTk.PhotoImage(universityImg)
+        Label(window,image=self.uniphoto).pack()
         
         
     

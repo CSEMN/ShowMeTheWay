@@ -1,8 +1,9 @@
 from tkinter import *
 from tkinter import ttk 
+from tkinter import messagebox
 from MiniScripts import CSVManip
 from MiniScripts.GeoCalculator import calc_pixels
-from search_algorithm.a_star import a_star
+from search_algorithm.a_star import a_star_search
 from search_algorithm.breadth_first import bfs
 from search_algorithm.deepth_first import dfs
 import time
@@ -21,7 +22,7 @@ class UserEntryFrame(Frame):
         self.algo = StringVar(self.lblFrame)
         self.algo.set("BFS") # default value
 
-        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "BFS","BFS", "DFS")
+        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "A*","BFS", "DFS","A*")
         self.algoSelector.grid(row=0,column=0,rowspan=2,padx=(10,5))
         self.isThreadRunning=False
         self.btn=ttk.Button(self.lblFrame,text='GO !!!',command=lambda :self.onClickAction(pinPoint,drawArrow,clearMap))
@@ -43,12 +44,27 @@ class UserEntryFrame(Frame):
             self.btn["state"] = NORMAL
 
     def onClickAction(self,pin_point,draw_arrow,clearMap):
-        # x=float(self.xposEntry.get())
-        # y=float(self.yposEntry.get())
-        # func(x,y,'Click !')
-        clearMap()
+
+        #check if cities exists
         cityFrom=self.fromSelector.value.get()
         cityTo=self.toSelector.value.get()
+        allCitiesList= CSVManip.getCitiesNamesList()
+        
+        if not cityFrom:#empty
+            messagebox.showinfo("Empty Entry",'''Please, Enter "Start city" ''')
+            return
+        elif not cityTo:#empty
+            messagebox.showinfo("Empty Entry",'''Please, Enter "Distnation city" ''')
+            return
+        elif cityFrom not in allCitiesList:
+            messagebox.showerror("City Not Found",'''"Start City" isn't in dataset or misspelled ''')
+            return
+        elif cityTo not in allCitiesList:
+            messagebox.showerror("City Not Found",'''"Distnation City" isn't in dataset or misspelled ''')
+            return
+        
+        
+        clearMap()
         result=list()
         algoName=self.algo.get()
         if algoName=='BFS':
@@ -56,7 +72,7 @@ class UserEntryFrame(Frame):
         elif algoName=='DFS':
             result=dfs(cityFrom,cityTo)
         elif algoName=='A*':
-            result=a_star(cityFrom,cityTo)
+            result=a_star_search(cityFrom,cityTo)
         
         dataDict=CSVManip.dictCSVdata()
 
@@ -77,8 +93,7 @@ class UserEntryFrame(Frame):
             self.isThreadRunning=False;
             self.btnStat()
         thread = Thread(name='drawOnMapThread',target = drawOnMap)
-        if not thread.is_alive():
-            thread.start()
+        thread.start()
 
             
 
