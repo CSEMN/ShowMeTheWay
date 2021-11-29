@@ -1,4 +1,5 @@
 import geopy.distance
+from MiniScripts.api_key import API_KEY
 
 def calc_distance(lat1,lng1,lat2,lng2):
     coords_1 = (lat1, lng1)
@@ -6,7 +7,7 @@ def calc_distance(lat1,lng1,lat2,lng2):
     return geopy.distance.distance(coords_1, coords_2).km
 
 def calc_driving_distance():
-    API_KEY='AIzaSyAc_6qYE_jQf0c-YnciqFLoDklzpGD8FkI'
+    API_KEY
     
 
 def calc_pixels(x,y):
