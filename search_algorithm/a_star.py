@@ -20,7 +20,7 @@ def a_star_search(startCity, distCity):
             break
         
         for next in adj_list[current]:
-            new_cost = cost_so_far[current] + float(data[current][next])
+            new_cost = cost_so_far[current] + float(data[current][next+"_r"])
             if next not in cost_so_far or new_cost < cost_so_far[next]:
                 cost_so_far[next] = new_cost
                 priority = new_cost +  float(data[next][distCity])
