@@ -17,7 +17,7 @@ class UserEntryFrame(Frame):
         self.lblFrame=LabelFrame(master,text='User Entry')
         
         #circle all cities on the map
-        #self.pinpointAllCities(onClick)
+        #self.pinpointAllCities(pinPoint)
         
         self.algo = StringVar(self.lblFrame)
         self.algo.set("BFS") # default value
