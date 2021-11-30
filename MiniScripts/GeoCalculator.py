@@ -22,9 +22,6 @@ def calc_driving_distance(lat1,lng1,lat2,lng2):
     else:
         return 0.0
 
-
-       
-calc_driving_distance(30.0561,31.2394,31.2000,29.9167)
 def calc_pixels(x,y):
     xpos = (-18.67870 * pow(x,4)) + 2344.64935* pow(x,3)-110330.13041*pow(x,2)+2306889.77548*x-18085207.56888
     ypos= -122.23919*pow(y,4)+14992.73104*pow(y,3)-689533.76977*pow(y,2)+14093270.30405*y-108007280.96092
