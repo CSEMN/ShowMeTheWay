@@ -38,3 +38,16 @@ def bfs(startCity,distCity):
         bfs_traversal_output=bfs(startCity,distCity)
     return bfs_traversal_output
 
+def pickBestBFS(startCity,distCity):
+    REPEAT_LIMIT=20
+    ouputList=list()
+    for i in range(REPEAT_LIMIT):
+        ouputList.append(bfs(startCity,distCity))
+    ouputList.sort(key=len)
+    # print("------------------")
+    # print(startCity+" -> "+distCity)
+    # print("------------------")
+    # for output in ouputList:
+    #     print(len(output),end=' : ')
+    #     print(output)
+    return ouputList[0]
