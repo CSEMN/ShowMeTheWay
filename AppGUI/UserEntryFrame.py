@@ -4,7 +4,7 @@ from tkinter import messagebox
 from MiniScripts import CSVManip
 from MiniScripts.GeoCalculator import calc_pixels
 from search_algorithm.a_star import a_star_search
-from search_algorithm.breadth_first import bfs
+from search_algorithm.breadth_first import pickBestBFS
 from search_algorithm.deepth_first import pickBestDFS
 import time
 from threading import Thread
@@ -68,7 +68,7 @@ class UserEntryFrame(Frame):
         result=list()
         algoName=self.algo.get()
         if algoName=='BFS':
-            result=bfs(cityFrom,cityTo)
+            result=pickBestBFS(cityFrom,cityTo)
         elif algoName=='DFS':
             result=pickBestDFS(cityFrom,cityTo)
         elif algoName=='A*':
