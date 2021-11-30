@@ -5,7 +5,7 @@ from MiniScripts import CSVManip
 from MiniScripts.GeoCalculator import calc_pixels
 from search_algorithm.a_star import a_star_search
 from search_algorithm.breadth_first import bfs
-from search_algorithm.deepth_first import dfs
+from search_algorithm.deepth_first import pickBestDFS
 import time
 from threading import Thread
 
@@ -70,7 +70,7 @@ class UserEntryFrame(Frame):
         if algoName=='BFS':
             result=bfs(cityFrom,cityTo)
         elif algoName=='DFS':
-            result=dfs(cityFrom,cityTo)
+            result=pickBestDFS(cityFrom,cityTo)
         elif algoName=='A*':
             result=a_star_search(cityFrom,cityTo)
         
