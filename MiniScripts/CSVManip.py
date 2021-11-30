@@ -54,8 +54,10 @@ def getAdjDict():
 def setCitiesDistance():
     data=getCSVData()
     dictData=dictCSVdata()
+    #adjDict=getAdjDict()
     for line in data:
         CSV_FILE_HEADER.append(line['city'])
+        CSV_FILE_HEADER.append(line['city']+"_r")
         lat1=float(line['lat'])
         lng1=float(line['lng'])
         for city in dictData.keys():
@@ -63,11 +65,20 @@ def setCitiesDistance():
             lng2=float(dictData[city]['lng'])
             dist =  GeoCalculator.calc_distance(lat1,lng1,lat2,lng2)
             line[city]=dist
+            #use google api to calculate real distance
+            # if(city in adjDict[line['city']]):
+            #     print("calculating... ("+city+","+line["city"]+")")
+            #     dist =  GeoCalculator.calc_driving_distance(lat1,lng1,lat2,lng2)
+            #     line[city+"_r"]=dist
+            #     print("done")
     csvfile= open(CSV_FILE_NAME,'w', newline='',encoding="utf8")
     writer = csv.DictWriter(csvfile, fieldnames=CSV_FILE_HEADER)
     writer.writeheader()
     writer.writerows(data)
     csvfile.close()
+
+#setCitiesDistance()
+
 
 def resetCSV():
     data=getCSVData()
