@@ -9,6 +9,8 @@ from search_algorithm.deepth_first import pickBestDFS
 import time
 from threading import Thread
 
+from search_algorithm.dijkstra import dijkstra
+
 
 class UserEntryFrame(Frame):
     def __init__(self,master,pinPoint,drawArrow,clearMap):
@@ -22,7 +24,7 @@ class UserEntryFrame(Frame):
         self.algo = StringVar(self.lblFrame)
         self.algo.set("BFS") # default value
 
-        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "A*","BFS", "DFS","A*")
+        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "A*","BFS", "DFS","A*","Dijkstra")
         self.algoSelector.grid(row=0,column=0,rowspan=2,padx=(10,5))
         self.isThreadRunning=False
         self.btn=ttk.Button(self.lblFrame,text='GO !!!',command=lambda :self.onClickAction(pinPoint,drawArrow,clearMap))
@@ -73,6 +75,8 @@ class UserEntryFrame(Frame):
             result=pickBestDFS(cityFrom,cityTo)
         elif algoName=='A*':
             result=a_star_search(cityFrom,cityTo)
+        elif algoName=='Dijkstra':
+            result=dijkstra(cityFrom,cityTo)
         
         dataDict=CSVManip.dictCSVdata()
 
