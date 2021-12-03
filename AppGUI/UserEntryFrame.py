@@ -10,6 +10,7 @@ import time
 from threading import Thread
 
 from search_algorithm.dijkstra import dijkstra
+from search_algorithm.uniform_cost import uniformCostSearch
 
 
 class UserEntryFrame(Frame):
@@ -22,9 +23,9 @@ class UserEntryFrame(Frame):
         #self.pinpointAllCities(pinPoint)
         
         self.algo = StringVar(self.lblFrame)
-        self.algo.set("BFS") # default value
+        self.algo.set("Uniform Cost") # default value
 
-        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "A*","BFS", "DFS","A*","Dijkstra")
+        self.algoSelector = ttk.OptionMenu(self.lblFrame, self.algo, "Uniform Cost","BFS", "DFS","A*","Dijkstra","Uniform Cost")
         self.algoSelector.grid(row=0,column=0,rowspan=2,padx=(10,5))
         self.isThreadRunning=False
         self.btn=ttk.Button(self.lblFrame,text='GO !!!',command=lambda :self.onClickAction(pinPoint,drawArrow,clearMap))
@@ -77,6 +78,8 @@ class UserEntryFrame(Frame):
             result=a_star_search(cityFrom,cityTo)
         elif algoName=='Dijkstra':
             result=dijkstra(cityFrom,cityTo)
+        elif algoName=='Uniform Cost':
+            result=uniformCostSearch(cityFrom,cityTo)
         
         dataDict=CSVManip.dictCSVdata()
 
