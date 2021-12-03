@@ -11,7 +11,7 @@ def dijkstra(startCity,distCity):
     prev = dict()
     found =False
     #Initialize data
-    Q.put(startCity,0.0)
+    Q.put((0.0,startCity))
     for city in allCities:
         distances[city]=float('inf')#infinity
         prev[city]=None
@@ -20,13 +20,13 @@ def dijkstra(startCity,distCity):
         if  prev[distCity]!=None:
             found =True
             break
-        node = Q.get()
+        node = Q.get()[1]
         for adjCity in adj_list[node]:
             newdistance= distances[node]+float(data[node][adjCity+"_r"])
             if newdistance < distances[adjCity] :
                 distances[adjCity]=newdistance
                 prev[adjCity]=node
-                Q.put(adjCity,newdistance)
+                Q.put((newdistance,adjCity))
     if found:
         path=list()
         node=distCity

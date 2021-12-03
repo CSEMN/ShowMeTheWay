@@ -7,7 +7,7 @@ def a_star_search(startCity, distCity):
     adj_list=getAdjDict()
     data=dictCSVdata()
     frontier = PriorityQueue()
-    frontier.put(startCity, 0)
+    frontier.put((0.0,startCity))
     came_from = dict()
     cost_so_far = dict()
     came_from[startCity] = None
@@ -15,7 +15,7 @@ def a_star_search(startCity, distCity):
     
     while not frontier.empty():
 
-        current = frontier.get()
+        current = frontier.get()[1]
         if current == distCity:
             break
         
@@ -24,7 +24,7 @@ def a_star_search(startCity, distCity):
             if next not in cost_so_far or new_cost < cost_so_far[next]:
                 cost_so_far[next] = new_cost
                 priority = new_cost +  float(data[next][distCity])
-                frontier.put(next, priority)
+                frontier.put((priority,next))
                 came_from[next] = current
     
     path=list()
