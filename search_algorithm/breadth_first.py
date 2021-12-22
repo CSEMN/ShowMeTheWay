@@ -27,7 +27,7 @@ def bfs(startCity,distCity):
         if u==distCity:
             break;
 
-        for v in random.sample(adj_list[u].keys(),len(adj_list[u].keys())):
+        for v in adj_list[u].keys():
             if not visited[v]:
                 visited[v]=True
                 parent[v]=u
@@ -36,18 +36,13 @@ def bfs(startCity,distCity):
     #if not found redo the algorithm
     while(bfs_traversal_output[-1]!=distCity):
         bfs_traversal_output=bfs(startCity,distCity)
-    return bfs_traversal_output
-
-def pickBestBFS(startCity,distCity):
-    REPEAT_LIMIT=20
-    ouputList=list()
-    for i in range(REPEAT_LIMIT):
-        ouputList.append(bfs(startCity,distCity))
-    ouputList.sort(key=len)
-    # print("------------------")
-    # print(startCity+" -> "+distCity)
-    # print("------------------")
-    # for output in ouputList:
-    #     print(len(output),end=' : ')
-    #     print(output)
-    return ouputList[0]
+    path=list()
+    node=distCity;
+    
+    while(node!=startCity):
+        path.append(node)
+        node=parent[node]
+    
+    path.append(startCity)
+    path.reverse()
+    return path
