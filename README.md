@@ -1,5 +1,5 @@
 # ShowMeTheWay
- Python GUI (tkinter) project selects the best path to travel between certain Egyptian cities.  
+ Python GUI (tkinter) project selects the path to travel between certain Egyptian cities.  
  supports (A*,DFS,BFS,Uniform Cost,Dijkstra) searching algorithms.  
  Mainly developed to visualize the diffrence between different searching algorithms.  
  
